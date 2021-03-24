@@ -1,0 +1,203 @@
+#container {
+    display: flex;                  /* establish flex container */
+    flex-direction: row;            /* default value; can be omitted */
+    flex-wrap: nowrap;              /* default value; can be omitted */
+    justify-content: space-between; /* switched from default (flex-start, see below) */
+    background-color: lightyellow;
+  }
+  #container > div.nested {
+    width: auto;
+    /* height: 100%; */
+    border: 2px dashed grey;
+  }
+
+  /* left code here */
+  
+.left-toolbar-region>.left-toolbar {
+	-webkit-box-sizing: inherit;
+	box-sizing: inherit;
+	position: relative;
+	color: #333;
+	display: inline-block;
+	-webkit-flex-shrink: 0;
+	-ms-flex-negative: 0;
+	flex-shrink: 0;
+	-webkit-box-ordinal-group: 3;
+	-webkit-order: 2;
+	-ms-flex-order: 2;
+	order: 2;
+  width: 450px;
+	text-align: left;
+	vertical-align: top;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: #fdfdfd;
+	border-left: 1px solid #f1f1f1;
+	-webkit-transition: width .2s ease-in-out;
+	transition: width .2s ease-in-out
+}
+
+
+.trpToolbarHeaderItem {
+	display: inline-block;
+	font-size: 1.5rem;
+	text-transform: uppercase;
+	font-weight: 300;
+	-webkit-transition: color .3s ease-in-out;
+	transition: color .3s ease-in-out;
+	color: #a2a3a3
+}
+
+.trpToolbarHeaderItem.hidden {
+	display: none
+}
+
+.trpToolbarHeaderItem:hover {
+	color: #333
+}
+
+.trpToolbarHeaderItem:first-child {
+	margin-right: 10px
+}
+
+.selected {
+	opacity: 1
+}
+
+.disabled {
+	color: #ccc;
+	cursor: not-allowed
+}
+
+.frame-people {
+	overflow: auto
+}
+
+.frame-people .view {
+	float: left
+}
+
+.trpDisplayPicture {
+	display: inline-block;
+	text-align: center;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-repeat: no-repeat;
+	border-bottom: 2px solid transparent
+}
+.trpDisplayPicture .avatar__image {
+	width: 30px;
+	max-width: 30px;
+	border-radius: 4px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	height: 30px;
+	border: none;
+	background-color: #eee
+}
+a .trpDisplayPicture {
+	color: white
+}
+.roster li {
+	padding-right: 8px
+}
+ul.roster {
+	list-style: none;
+	margin-left: 0
+}
+
+ul.roster li {
+	display: inline-block
+}
+#people-roster {
+	margin-left: 6px
+}
+
+.trpToolbarListContent {
+    padding-left: 10px;
+  max-height: 180px;   
+  min-width:150px;
+  overflow-y : auto;
+  }
+
+.people-modal-result_label {
+    overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    opacity: .6;
+    word-break: break-all;
+    max-width: 120px;
+    min-width: 120px;
+  }
+
+
+  .dndflow {
+    flex-direction: column;
+    display: flex;
+    min-height: 800px;
+    min-width: 40%;
+  }
+  
+  .dndflow aside {
+    border-right: 1px solid #eee;
+    padding: 15px 10px;
+    font-size: 12px;
+    background: #fcfcfc;
+    width:400px;
+  }
+  
+  .dndflow aside .description {
+    margin-bottom: 10px;
+  }
+  
+  .dndflow .dndnode {
+    height: 20px;
+    padding: 4px;
+    border: 1px solid #1a192b;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+    width:20%;
+  }
+  
+  .dndflow .dndnode.input {
+    border-color: #0041d0;
+  }
+  
+  .dndflow .dndnode.output {
+    border-color: #ff0072;
+  }
+  
+  .dndflow .reactflow-wrapper {
+    flex-grow: 1;
+    /* height: 500px;
+    min-height: 300px; */
+  }
+  .flex-container {
+    display: flex;
+}
+
+.dndnode {
+    flex: 10;
+    border: 2px solid yellow;
+}  
+
+.dndnode:first-child {
+    margin-right: 20px;
+} 
+  
+  @media screen and (min-width: 768px) {
+    .dndflow {
+      flex-direction: row;
+    }
+  
+    .dndflow aside {
+      max-width: 500px;
+    }
+  }
