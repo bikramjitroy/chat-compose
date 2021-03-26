@@ -6,7 +6,6 @@ import ReactFlow, {
   Controls,
   MiniMap,
   Background,
-  updateEdge,
 } from 'react-flow-renderer';
 import {Propwrap} from './Propwrap'
 
@@ -145,7 +144,7 @@ const initialElements = [
 
     componentDidMount() { console.log('called didMount'); }
     componentWillUpdate(prevProps, prevState) { 
-      if(this.state.nodeName!=prevState.nodeName){
+      if(this.state.nodeName!==prevState.nodeName){
         this.setState({elements:this.state.elements.map((el) => {
 
                 if (el.id === prevState.nodeName.id) {

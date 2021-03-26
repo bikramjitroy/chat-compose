@@ -22,7 +22,7 @@ export class Propwrap extends Component {
     }
 
     componentWillUpdate(prevProps, prevState){
-        if(prevProps.element&&this.state.element&&(prevProps.element.id!=this.state.element.id)){
+        if(prevProps.element&&this.state.element&&(prevProps.element.id!==this.state.element.id)){
             this.setState({
                 element:prevProps.element,
                 updateNodeCb:prevProps.updateNodeCb,
