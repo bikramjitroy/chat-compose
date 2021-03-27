@@ -2,7 +2,7 @@
 	z-index: 111!important
 }
 .block {
-	position: absolute;
+	/* position: absolute; */
 	z-index: 9
 }
 .indicator {

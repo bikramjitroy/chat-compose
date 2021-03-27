@@ -8,13 +8,21 @@ import ReactFlow, {
   Background,
 } from 'react-flow-renderer';
 import {Propwrap} from './Propwrap'
+import TwoInput from './Twoinput';
+import StartInput from './Startinput';
+import Stopinput from './Stopinput';
+const nodeTypes = {
+  selectorInput: TwoInput,
+  selectorNodeStart: StartInput,
+  selectorStop: Stopinput,
+};
 
 const initialElements = [
     {
       id: '1',
-      type: 'input',
+      type: 'selectorNodeStart',
       label: 'Start',
-      data: { label: 'Start',type:"node" },
+      data: { label: 'Start',description: 'Start Node',type:"node",'image':'eye.svg' },
       position: { x: 180, y: -395  },
     },
     // {
@@ -108,29 +116,31 @@ const initialElements = [
   // console.log('sasds',this);
       const reactFlowBounds = this.state.reactFlowWrapper.current.getBoundingClientRect();
       const type = event.dataTransfer.getData('application/reactflow');
-      const title = event.dataTransfer.getData('title');
+      const elementCreate = JSON.parse(event.dataTransfer.getData('element'));
       const position = this.state.reactFlowInstance.project({
         x: event.clientX - reactFlowBounds.left,
         y: event.clientY - reactFlowBounds.top,
       });
+      console.log(elementCreate);
       const newNode = {
         id: getId(),
         type,
         position,
-        label: `${title}`,
-        data: { label: `${title}`,type:"node" },
+        label: `${elementCreate.label}`,
+        
+        data: { label: `${elementCreate.label}`,description: `${elementCreate.description}`,type:"node",'image':elementCreate.image },
       };
       console.log('newNode',newNode,event.dataTransfer);
   
       this.setState({elements:this.state.elements.concat(newNode)});
     };
     onElementClick(event, element){
-        console.log(element);
+        // console.log(element);
         this.setState({element:element}); 
     }   
 
     updateEdgeText(old,newEl,type){ 
-        
+        console.log('old,newEl,type',old,newEl,type);
           // if(type){
           //   this.setState({elements:updateEdge(old, newEl, this.state.elements)});
           //   console.log('calling',old, newEl,updateEdge(old, newEl, this.state.elements));
@@ -142,8 +152,9 @@ const initialElements = [
         
       }
 
-    componentDidMount() { console.log('called didMount'); }
+    // componentDidMount() { console.log('called didMount'); }
     componentWillUpdate(prevProps, prevState) { 
+      console.log('debug',this.state.nodeName,prevState.nodeName)
       if(this.state.nodeName!==prevState.nodeName){
         this.setState({elements:this.state.elements.map((el) => {
 
@@ -161,6 +172,7 @@ const initialElements = [
                 return el;
               })}
             );
+            console.log('debugRunn',this.state.nodeName,prevState.nodeName)
       }
     }
       
@@ -201,6 +213,7 @@ const initialElements = [
                 onElementClick={this.onElementClick.bind(this)}
                 defaultZoom={1.5}
                 onNodeDragStop={this.onNodeDragStop.bind(this)}
+                nodeTypes={nodeTypes}
               >
                   <MiniMap
               nodeStrokeColor={(n) => {

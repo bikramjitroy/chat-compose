@@ -1,4 +1,23 @@
 import React, {Component} from 'react';
+
+const json = {"send":{'title':'Bot Send','elements':[
+    {'label':'Text','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'eye.svg'},
+    {'label':'Image','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg'},
+    {'label':'Document','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'time.svg'},
+    {'label':'Audio','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'error.svg'},
+    {'label':'Video','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'error.svg'},
+    {'label':'Location','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'error.svg'},
+    ]},"receive":{'title':'Bot Recevies','elements':[
+        {'label':'User Input','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'eye.svg'},
+        {'label':'Attribute','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg'},
+        ]},"action":{'title':'Bot Actions','elements':[
+            {'label':'Start','description':'Triggers when somebody visits a specified page','type':'selectorNodeStart','image':'eye.svg'},
+            {'label':'To Agent','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg'},
+            {'label':'Api Calling','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg'},
+            {'label':'Coding','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg'},
+            {'label':'Close','description':'Triggers when somebody visits a specified page','type':'selectorStop','image':'action.svg'},
+            ]}};
+    
 export class Leftcard extends Component {
     constructor(props) {
         super(props)
@@ -10,13 +29,10 @@ export class Leftcard extends Component {
         this.setState({activeClass:evt.target.id})
     }
     onDragStart(event, nodeType,title){
+        
         event.dataTransfer.setData('application/reactflow', nodeType);
-        event.dataTransfer.setData('title', title);
-    
+        event.dataTransfer.setData('element', title);
         event.dataTransfer.effectAllowed = 'move';
-    };
-    SelectDivStart(event){
-
     };
     render() {
         
@@ -31,111 +47,38 @@ export class Leftcard extends Component {
                     <input type="text" placeholder="Search blocks"/>
                 </div>
                 <div id="subnav">
-                    <div id="send" className={this.state.activeClass==='send' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>Bot Send</div>
-                    <div id="receive" className={this.state.activeClass==='receive' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)} >Bot Recevies</div>
-                    <div id="action" className={this.state.activeClass==='action' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>Bot Actions</div>
+                {Object.keys(json).map((e, i) => {
+                   return(<div id={e} className={this.state.activeClass===e ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>{json[e].title}</div> )
+                    
+                })}
                 </div>
-                <div id="blocklist1 send" className={this.state.activeClass==='send' ? 'blocklist' : 'hidden blocklist'}>
-                    <div className="blockelem create-flowy noselect" onClick={(event)=>this.SelectDivStart} onDragStart={(event) => this.onDragStart(event, 'default','Text')}  draggable>
-                        <input type="hidden" name='blockelemtype' className="blockelemtype" value="1"/>
-                        <div className="grabme">
-                            <img src="assets/grabme.svg" alt="grabme"/>
-                        </div>
-                        <div className="blockin">
-                            <div className="blockico">
-                                <span></span>
-                                <img src="assets/eye.svg" alt="eye"/>
+                {Object.keys(json).map((e, i) => {
+                return (
+                <div id={`blocklist${++i} ${e}`} className={this.state.activeClass===e ? 'blocklist' : 'hidden blocklist'}>
+                    {json[e].elements.map((item, iNested) => {
+                    return (
+                        <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, item.type,JSON.stringify(item))}  draggable>
+                            <div className="grabme">
+                                <img src="assets/grabme.svg" alt="grabme"/>
                             </div>
-                            <div className="blocktext">
-                                <p className="blocktitle">Text</p>
-                                <p className="blockdesc">Triggers when somebody visits a specified page</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'default','Image')}  draggable>
-                        <input type="hidden" name='blockelemtype' className="blockelemtype" value="2"/>
-                        <div className="grabme">
-                            <img src="assets/grabme.svg" alt="grabme"/>
-                        </div>
-                        <div className="blockin">
-                            <div className="blockico">
-                                <span></span>
-                                <img src="assets/action.svg" alt="action"/>
-                            </div>
-                            <div className="blocktext">
-                                <p className="blocktitle">Image</p>
-                                <p className="blockdesc">Triggers when somebody performs a specified action</p>
+                            <div className="blockin">
+                                <div className="blockico">
+                                    <span></span>
+                                    <img src={`assets/${item.image}`} alt={item.image}/>
+                                </div>
+                                <div className="blocktext">
+                    <p className="blocktitle">{item.label}</p>
+                                    <p className="blockdesc">{item.description}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'default','Document')}  draggable>
-                        <input type="hidden" name='blockelemtype' className="blockelemtype" value="3" />
-                        <div className="grabme">
-                            <img src="assets/grabme.svg" alt="grabme" />
-                        </div>
-                        <div className="blockin">
-                            <div className="blockico">
-                                <span></span>
-                                <img src="assets/time.svg" alt="time"/>
-                            </div>
-                            <div className="blocktext">
-                                <p className="blocktitle">Document</p>
-                                <p className="blockdesc">Triggers after a specified amount of time</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'default','Audio')}  draggable>
-                        <input type="hidden" name='blockelemtype' className="blockelemtype" value="4" />
-                        <div className="grabme">
-                            <img src="assets/grabme.svg" alt="grabme"/>
-                        </div>
-                        <div className="blockin">
-                            <div className="blockico">
-                                <span></span>
-                                <img src="assets/error.svg" alt="error"/>
-                            </div>
-                            <div className="blocktext">
-                                <p className="blocktitle">Audio</p>
-                                <p className="blockdesc">Triggers when a specified error happens</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'default','Video')}  draggable>
-                        <input type="hidden" name='blockelemtype' className="blockelemtype" value="4" />
-                        <div className="grabme">
-                            <img src="assets/grabme.svg" alt="grabme"/>
-                        </div>
-                        <div className="blockin">
-                            <div className="blockico">
-                                <span></span>
-                                <img src="assets/error.svg" alt="error"/>
-                            </div>
-                            <div className="blocktext">
-                                <p className="blocktitle">Video</p>
-                                <p className="blockdesc">Triggers when a specified error happens</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'default','Location')}  draggable>
-                        <input type="hidden" name='blockelemtype' className="blockelemtype" value="4" />
-                        <div className="grabme">
-                            <img src="assets/grabme.svg" alt="grabme"/>
-                        </div>
-                        <div className="blockin">
-                            <div className="blockico">
-                                <span></span>
-                                <img src="assets/error.svg" alt="error"/>
-                            </div>
-                            <div className="blocktext">
-                                <p className="blocktitle">Location</p>
-                                <p className="blockdesc">Triggers when a specified error happens</p>
-                            </div>
-                        </div>
-                    </div>
+                        );
+                    })}
                 </div>
-                <div id="blocklist2 receive" className={this.state.activeClass==='receive' ? 'blocklist' : 'hidden blocklist'}>
-                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'default','User Input')}  draggable>
-                        <input type="hidden" name='blockelemtype' className="blockelemtype" value="1"/>
+                );    
+            })}
+                {/* <div id="blocklist2 receive" className={this.state.activeClass==='receive' ? 'blocklist' : 'hidden blocklist'}>
+                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'selectorInput','User Input')}  draggable>
                         <div className="grabme">
                             <img src="assets/grabme.svg" alt="grabme"/>
                         </div>
@@ -150,8 +93,7 @@ export class Leftcard extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'default','Attribute')}  draggable>
-                        <input type="hidden" name='blockelemtype' className="blockelemtype" value="1"/>
+                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'selectorInput','Attribute')}  draggable>
                         <div className="grabme">
                             <img src="assets/grabme.svg" alt="grabme"/>
                         </div>
@@ -168,8 +110,7 @@ export class Leftcard extends Component {
                     </div>
                 </div>
                 <div id="blocklist3 action" className={this.state.activeClass==='action' ? 'blocklist' : 'hidden blocklist'}>
-                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'input','Start')} draggable>
-                        <input type="hidden" name='blockelemtype' className="blockelemtype" value="1"/>
+                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'selectorNodeStart','Start')} draggable>
                         <div className="grabme">
                             <img src="assets/grabme.svg" alt="grabme"/>
                         </div>
@@ -180,12 +121,11 @@ export class Leftcard extends Component {
                             </div>
                             <div className="blocktext">
                                 <p className="blocktitle">Start</p>
-                                <p className="blockdesc">Triggers when somebody visits a specified page</p>
+                                <p className="blockdesc">Start node</p>
                             </div>
                         </div>
                     </div>
-                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'default','To Agent')}  draggable>
-                        <input type="hidden" name='blockelemtype' className="blockelemtype" value="1"/>
+                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'selectorInput','To Agent')}  draggable>
                         <div className="grabme">
                             <img src="assets/grabme.svg" alt="grabme"/>
                         </div>
@@ -200,8 +140,7 @@ export class Leftcard extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'default','Api Calling')}  draggable>
-                        <input type="hidden" name='blockelemtype' className="blockelemtype" value="1"/>
+                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'selectorInput','Api Calling')}  draggable>
                         <div className="grabme">
                             <img src="assets/grabme.svg" alt="grabme"/>
                         </div>
@@ -216,8 +155,7 @@ export class Leftcard extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'default','Coding')}  draggable>
-                        <input type="hidden" name='blockelemtype' className="blockelemtype" value="1"/>
+                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'selectorInput','Coding')}  draggable>
                         <div className="grabme">
                             <img src="assets/grabme.svg" alt="grabme"/>
                         </div>
@@ -232,8 +170,7 @@ export class Leftcard extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'output','Close')}  draggable>
-                        <input type="hidden" name='blockelemtype' className="blockelemtype" value="1"/>
+                    <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, 'selectorStop','Close')}  draggable>
                         <div className="grabme">
                             <img src="assets/grabme.svg" alt="grabme"/>
                         </div>
@@ -248,7 +185,7 @@ export class Leftcard extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
             
         );

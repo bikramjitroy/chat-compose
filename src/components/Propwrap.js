@@ -5,7 +5,7 @@ export class Propwrap extends Component {
         this.state ={
             element:props.element,
             updateNodeCb:props.updateNodeCb,
-            clicked:false
+            clicked:'dataprop'
         };
         this.updateText1 = this.updateText1.bind(this);
     }
@@ -14,7 +14,7 @@ export class Propwrap extends Component {
             this.setState({
                 element:nextProps.element,
                 updateNodeCb:nextProps.updateNodeCb,
-                clicked:false
+                clicked:'dataprop'
             });
 
             console.log('nextProps',nextProps);
@@ -26,7 +26,7 @@ export class Propwrap extends Component {
             this.setState({
                 element:prevProps.element,
                 updateNodeCb:prevProps.updateNodeCb,
-                clicked:false
+                clicked:'dataprop'
             });
         }
         
@@ -45,10 +45,19 @@ export class Propwrap extends Component {
         console.log('nextPropsShould',prevProps,prevState,this.state);
     }
 
-
+    _handleClick(evt){
+        this.setState({clicked:evt.target.id})
+    }
         
     handlerChange(evt){
-        this.setState({element:{...this.state.element,label:evt.target.value,data:{label:evt.target.value,type:this.state.element.data.type}}});
+        if(evt.target.id==='id_label'){
+        this.setState({element:{...this.state.element,label:evt.target.value,data:{...this.state.element.data,label:evt.target.value}}});
+        }else{
+            let a = {};
+            a[evt.target.id]=evt.target.value;
+            var obj = Object.assign({}, this.state.element.data, a);
+            this.setState({element:{...this.state.element,data:{...obj}}}); 
+        }
     }
     updateText1 (evt) {
         // this.setState({clicked:true});
@@ -69,33 +78,78 @@ export class Propwrap extends Component {
     }
 
     render() {
-        
-        return (
-            <div id="propwrap" className={(this.state.element&&this.state.element.data)?"itson":""}>
-                <div id="properties" className={(this.state.element&&this.state.element.data)?"expanded":''}>
-                    <div id="close">
-                        <img src="assets/close.svg" alt="close"/>
+        if(this.state.element&&this.state.element.data.type === 'edge') {
+            return (
+                <div id="propwrap" className={(this.state.element&&this.state.element.data)?"itson":""}>
+                    <div id="properties" className={(this.state.element&&this.state.element.data)?"expanded":''}>
+                        <div id="close">
+                            <img src="assets/close.svg" alt="close"/>
+                        </div>
+                        <p id="header2">Properties</p>
+                        <div id="propswitch">
+                            <div id="dataprop" className={this.state.clicked==='dataprop' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>Data</div>
+                            <div id="alertprop" className={this.state.clicked==='alertprop' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>Alerts</div>
+                            <div id="logsprop" className={this.state.clicked==='logsprop' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>Logs</div>
+                        </div>
+                        <div className={this.state.clicked==='dataprop' ? 'proplist' : "proplist hidden"}>
+                            <p className="inputlabel">Name</p>
+                            <input className="dropme" id='id_label' type="text" value={(this.state.element&&this.state.element.data&&this.state.element.data.label)||''} onChange={this.handlerChange.bind(this)}/>
+                            
+                            {/* <p className="inputlabel">Check properties</p>
+                            {JSON.stringify(this.state.element)}
+                            <div className="dropme">All<img src="assets/dropdown.svg" alt="all"/></div>
+                            <div className="checkus"><img src="assets/checkon.svg" alt="checkon"/><p>Log on successful performance</p></div>
+                            <div className="checkus"><img src="assets/checkoff.svg" alt="checkoff"/><p>Give priority to this block</p></div> */}
+                        </div>
+                        <div className={this.state.clicked==='alertprop' ? 'proplist' : "proplist hidden"}>
+                            <div className="checkus"><p>Development inprogress</p></div>
+                        </div>
+                        <div className={this.state.clicked==='logsprop' ? 'proplist' : "proplist hidden"}>
+                            <div className="checkus"><p>Development inprogress</p></div>
+                        </div>
+                        <div id="divisionthing"></div>
+                        <div id="Saveblock" onClick={this.updateText1.bind(this)}>Save</div>
                     </div>
-                    <p id="header2">Properties</p>
-                    <div id="propswitch">
-                        <div id="dataprop">Data</div>
-                        <div id="alertprop">Alerts</div>
-                        <div id="logsprop">Logs</div>
-                    </div>
-                    <div id="proplist">
-                        <p class="inputlabel">Name</p>
-                        <input class="dropme" id='label' type="text" value={(this.state.element&&this.state.element.data&&this.state.element.data.label)||''} onChange={this.handlerChange.bind(this)}/>
-                        <p class="inputlabel">Check properties</p>
-                        {JSON.stringify(this.state.element)}
-                        <div class="dropme">All<img src="assets/dropdown.svg" alt="all"/></div>
-                        <div class="checkus"><img src="assets/checkon.svg" alt="checkon"/><p>Log on successful performance</p></div>
-                        <div class="checkus"><img src="assets/checkoff.svg" alt="checkoff"/><p>Give priority to this block</p></div>
-                    </div>
-                    <div id="divisionthing"></div>
-                    <div id="Saveblock" onClick={this.updateText1.bind(this)}>Save</div>
                 </div>
-            </div>
-        );
-    }
+            );
+        }else{
+            return (
+                <div id="propwrap" className={(this.state.element&&this.state.element.data)?"itson":""}>
+                    <div id="properties" className={(this.state.element&&this.state.element.data)?"expanded":''}>
+                        <div id="close">
+                            <img src="assets/close.svg" alt="close"/>
+                        </div>
+                        <p id="header2">Properties</p>
+                        <div id="propswitch">
+                            <div id="dataprop" className={this.state.clicked==='dataprop' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>Data</div>
+                            <div id="alertprop" className={this.state.clicked==='alertprop' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>Alerts</div>
+                            <div id="logsprop" className={this.state.clicked==='logsprop' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>Logs</div>
+                        </div>
+                        <div className={this.state.clicked==='dataprop' ? 'proplist' : "proplist hidden"}>
+                            <p className="inputlabel">Name</p>
+                            <input className="dropme" id='id_label' type="text" value={(this.state.element&&this.state.element.data&&this.state.element.data.label)||''} onChange={this.handlerChange.bind(this)}/>
+                            <p className="inputlabel">Description</p>
+                            <textarea className="dropmetextarea" id='description' value={(this.state.element&&this.state.element.data&&this.state.element.data.description)||''} onChange={this.handlerChange.bind(this)}></textarea>
+                            
+                            {/* <p className="inputlabel">Check properties</p>
+                            {JSON.stringify(this.state.element)}
+                            <div className="dropme">All<img src="assets/dropdown.svg" alt="all"/></div>
+                            <div className="checkus"><img src="assets/checkon.svg" alt="checkon"/><p>Log on successful performance</p></div>
+                            <div className="checkus"><img src="assets/checkoff.svg" alt="checkoff"/><p>Give priority to this block</p></div> */}
+                        </div>
+                        <div className={this.state.clicked==='alertprop' ? 'proplist' : "proplist hidden"}>
+                            <div className="checkus"><p>Development inprogress</p></div>
+                        </div>
+                        <div className={this.state.clicked==='logsprop' ? 'proplist' : "proplist hidden"}>
+                            <div className="checkus"><p>Development inprogress</p></div>
+                        </div>
+                        <div id="divisionthing"></div>
+                        <div id="Saveblock" onClick={this.updateText1.bind(this)}>Save</div>
+                    </div>
+                </div>
+            );
+        }
+        }
+        
 }
 export default Propwrap
