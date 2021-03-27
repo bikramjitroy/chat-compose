@@ -48,6 +48,11 @@ export class Propwrap extends Component {
     _handleClick(evt){
         this.setState({clicked:evt.target.id})
     }
+
+    _handleClickClose(evt){
+        console.log('clled');
+        this.setState({clicked:'dataprop',element:null})
+    }
         
     handlerChange(evt){
         if(evt.target.id==='id_label'){
@@ -82,7 +87,7 @@ export class Propwrap extends Component {
             return (
                 <div id="propwrap" className={(this.state.element&&this.state.element.data)?"itson":""}>
                     <div id="properties" className={(this.state.element&&this.state.element.data)?"expanded":''}>
-                        <div id="close">
+                        <div id="close" onClick={this._handleClickClose.bind(this)}>
                             <img src="assets/close.svg" alt="close"/>
                         </div>
                         <p id="header2">Properties</p>
@@ -116,7 +121,7 @@ export class Propwrap extends Component {
             return (
                 <div id="propwrap" className={(this.state.element&&this.state.element.data)?"itson":""}>
                     <div id="properties" className={(this.state.element&&this.state.element.data)?"expanded":''}>
-                        <div id="close">
+                        <div id="close" onClick={this._handleClickClose.bind(this)}>
                             <img src="assets/close.svg" alt="close"/>
                         </div>
                         <p id="header2">Properties</p>
