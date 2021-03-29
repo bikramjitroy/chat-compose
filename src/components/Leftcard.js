@@ -15,7 +15,7 @@ const json = {"send":{'title':'Bot Send','elements':[
             {'label':'To Agent','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg'},
             {'label':'Api Calling','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg'},
             {'label':'Coding','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg'},
-            {'label':'Close','description':'Triggers when somebody visits a specified page','type':'selectorStop','image':'action.svg'},
+            {'label':'Close','description':'Triggers when somebody visits a specified page','type':'selectorStop','image':'terminate.svg'},
             ]}};
     
 export class Leftcard extends Component {
