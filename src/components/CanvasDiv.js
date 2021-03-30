@@ -209,7 +209,7 @@ const initialElements = [
                 onDragOver={this.onDragOver.bind(this)}
                 deleteKeyCode={46}
                 snapToGrid={true}
-                snapGrid={[15, 15]}
+                snapGrid={[30, 30]}
                 onElementClick={this.onElementClick.bind(this)}
                 defaultZoom={1.5}
                 onNodeDragStop={this.onNodeDragStop.bind(this)}
@@ -221,6 +221,9 @@ const initialElements = [
                 if (n.type === 'input') return '#0041d0';
                 if (n.type === 'output') return '#ff0072';
                 if (n.type === 'default') return '#1a192b';
+                if (n.type === 'selectorInput') return '#0041d0';
+                if (n.type === 'selectorStop') return '#ff0072';
+                if (n.type === 'selectorNodeStart') return '#1a192b';
 
                 return '#eee';
               }}
