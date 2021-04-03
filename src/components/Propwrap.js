@@ -53,7 +53,7 @@ export class Propwrap extends Component {
         const list = [...this.state.rowChip];
         list[index][name] = value;
         this.setState({rowChip:list});
-        if(this.state.element.data.subtype==='suggestionchip'){
+        if(this.state.element.data.subtype==='suggestionchip'||this.state.element.data.subtype==='carousel'){
             let a = {rowChip:list};
             let obj = Object.assign({}, this.state.element.data, a);
             this.setState({element:{...this.state.element,data:{...obj}}}); 
@@ -177,7 +177,7 @@ export class Propwrap extends Component {
                         </div>
                         <div className={this.state.clicked==='alertprop' ? 'proplist' : "proplist hidden"}>
                             <div className="checkus"><p></p></div>
-                            {this.state.element&&this.state.element.data&&this.state.element.data.subtype==='suggestionchip'&&this.state.rowChip.map((x, i) => {
+                            {this.state.element&&this.state.element.data&&(this.state.element.data.subtype==='suggestionchip'||this.state.element.data.subtype==='carousel')&&this.state.rowChip.map((x, i) => {
                                     return (
                                     <div className="box">
                                         <p className="inputlabel">Image</p>

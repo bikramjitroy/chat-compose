@@ -8,6 +8,7 @@ const json = {"send":{'title':'Bot Send','elements':[
     {'label':'Video','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'error.svg'},
     {'label':'Location','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'error.svg'},
     {'label':'Suggestion Cips','description':'Triggers when somebody visits a specified page','type':'selectorInput','subtype':'suggestionchip','image':'error.svg'},
+    {'label':'Carousel Cips','description':'Triggers when somebody visits a specified page','type':'selectorInput','subtype':'carousel','image':'error.svg'},
     ]},"receive":{'title':'Bot Recevies','elements':[
         {'label':'User Input','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'eye.svg'},
         {'label':'Attribute','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg'},
