@@ -8,6 +8,7 @@ import ReactFlow, {
   Background,
 } from 'react-flow-renderer';
 import {Propwrap} from './Propwrap'
+import {Navigation} from './Navigation'
 import TwoInput from './Twoinput';
 import StartInput from './Startinput';
 import Stopinput from './Stopinput';
@@ -17,35 +18,9 @@ const nodeTypes = {
   selectorStop: Stopinput,
 };
 
-const initialElements = [
-    {
-      id: '1',
-      type: 'selectorNodeStart',
-      label: 'Start',
-      data: { label: 'Start',description: 'Start Node',type:"node",'image':'eye.svg' },
-      position: { x: 180, y: -395  },
-    },
-    // {
-    //   id: '2',
-    //   type: 'default',
-    //   label: 'Start',
-    //   data: { label: 'Start1',type:"node" },
-    //   position: { x: 550, y: 5 },
-    // },
-    // {
-    //   id: 'e1-2',
-    //   type: 'smoothstep', animated: false,
-    //   source: '1',
-    //   target: '2',
-    //   animated: false,
-    //   label: 'edge label',
-    //   data:{label: 'Edge label ',type:"edge"},
-    //   arrowHeadType: 'arrow' 
-    // }
-  ];
-  
-  let id = 0;
-  let idedge = 0
+const initialElements = [{"id":"1","type":"selectorNodeStart","label":"Start","data":{"label":"Start","description":"User Say Hi","type":"node","image":"eye.svg"},"position":{"x":150,"y":-1535}},{"id":"dndnode_0","type":"selectorInput","position":{"x":150,"y":-1350},"label":"Bot Text","data":{"label":"Bot Text","description":"Welcome to ABC PIZZA. How can We help You?","type":"node","image":"eye.svg"}},{"id":"dndnode_3","type":"selectorInput","position":{"x":-300,"y":-1140},"label":"Suggestion Cips","data":{"label":"Suggestion Cips","description":"Show Menu","type":"node","image":"error.svg"}},{"id":"dndnode_4","type":"selectorInput","position":{"x":0,"y":-1140},"label":"Suggestion Cips","data":{"label":"Suggestion Cips","description":"Track Order","type":"node","image":"error.svg"}},{"id":"dndnode_5","type":"selectorInput","position":{"x":330,"y":-1140},"label":"Suggestion Cips","data":{"label":"Suggestion Cips","description":"Cancel Order","type":"node","image":"error.svg"}},{"id":"dndnode_6","type":"selectorInput","position":{"x":0,"y":-960},"label":"Get Order Id","data":{"label":"Get Order Id","description":"Please Insert Your Order Id","type":"node","image":"eye.svg"}},{"id":"dndnode_7","type":"selectorInput","position":{"x":0,"y":-780},"label":"User Input","data":{"label":"User Input","description":"Customer Will enter order Id","type":"node","image":"eye.svg"}},{"id":"dndnode_8","type":"selectorInput","position":{"x":0,"y":-630},"label":"Api Calling","data":{"label":"Api Calling","description":"Find Customer Order details","type":"node","image":"action.svg"}},{"id":"dndnode_9","type":"selectorStop","position":{"x":360,"y":-300},"label":"Close","data":{"label":"Close","description":"Triggers when somebody visits a specified page","type":"node","image":"terminate.svg"}},{"id":"dndnode_10","type":"selectorInput","position":{"x":0,"y":-450},"label":"Text","data":{"label":"Text","description":"Send Details","type":"node","image":"eye.svg"}},{"id":"dndnode_11","type":"selectorInput","position":{"x":330,"y":-990},"label":"Text","data":{"label":"Text","description":"Please Insert Your Order Id","type":"node","image":"eye.svg"}},{"id":"dndnode_12","type":"selectorInput","position":{"x":330,"y":-840},"label":"Get Order Id","data":{"label":"Get Order Id","description":"Please Insert Your Order Id","type":"node","image":"eye.svg"}},{"id":"dndnode_13","type":"selectorInput","position":{"x":330,"y":-660},"label":"Api Calling","data":{"label":"Api Calling","description":"Cancel Api Called","type":"node","image":"action.svg"}},{"id":"dndnode_14","type":"selectorInput","position":{"x":540,"y":-510},"label":"Text","data":{"label":"Text","description":"Order cancelled successfully","type":"node","image":"eye.svg"}},{"source":"1","sourceHandle":"a","target":"dndnode_0","targetHandle":null,"type":"smoothstep","animated":false,"label":"HI","data":{"label":"HI","type":"edge"},"id":"react_edge_1","arrowHeadType":"arrow"},{"source":"dndnode_0","sourceHandle":"a","target":"dndnode_3","targetHandle":null,"type":"smoothstep","animated":false,"label":"Edge label 4","data":{"label":"Edge label 4","type":"edge"},"id":"react_edge_4","arrowHeadType":"arrow"},{"source":"dndnode_0","sourceHandle":"a","target":"dndnode_4","targetHandle":null,"type":"smoothstep","animated":false,"label":"Edge label 5","data":{"label":"Edge label 5","type":"edge"},"id":"react_edge_5","arrowHeadType":"arrow"},{"source":"dndnode_0","sourceHandle":"a","target":"dndnode_5","targetHandle":null,"type":"smoothstep","animated":false,"label":"Edge label 6","data":{"label":"Edge label 6","type":"edge"},"id":"react_edge_6","arrowHeadType":"arrow"},{"source":"dndnode_4","sourceHandle":"a","target":"dndnode_6","targetHandle":null,"type":"smoothstep","animated":false,"label":"Track Order","data":{"label":"Track Order","type":"edge"},"id":"react_edge_7","arrowHeadType":"arrow"},{"source":"dndnode_6","sourceHandle":"a","target":"dndnode_7","targetHandle":null,"type":"smoothstep","animated":false,"label":"Edge label 8","data":{"label":"Edge label 8","type":"edge"},"id":"react_edge_8","arrowHeadType":"arrow"},{"source":"dndnode_7","sourceHandle":"a","target":"dndnode_8","targetHandle":null,"type":"smoothstep","animated":false,"label":"Edge label 9","data":{"label":"Edge label 9","type":"edge"},"id":"react_edge_9","arrowHeadType":"arrow"},{"source":"dndnode_8","sourceHandle":"a","target":"dndnode_9","targetHandle":null,"type":"smoothstep","animated":false,"label":"If Order not Exist","data":{"label":"If Order not Exist","type":"edge"},"id":"react_edge_10","arrowHeadType":"arrow"},{"source":"dndnode_8","sourceHandle":"a","target":"dndnode_10","targetHandle":null,"type":"smoothstep","animated":false,"label":"Details Find","data":{"label":"Details Find","type":"edge"},"id":"react_edge_11","arrowHeadType":"arrow"},{"source":"dndnode_10","sourceHandle":"a","target":"dndnode_9","targetHandle":null,"type":"smoothstep","animated":false,"label":"Edge label 12","data":{"label":"Edge label 12","type":"edge"},"id":"react_edge_12","arrowHeadType":"arrow"},{"source":"dndnode_5","sourceHandle":"a","target":"dndnode_11","targetHandle":null,"type":"smoothstep","animated":false,"label":"Edge label 13","data":{"label":"Edge label 13","type":"edge"},"id":"react_edge_13","arrowHeadType":"arrow"},{"source":"dndnode_11","sourceHandle":"a","target":"dndnode_12","targetHandle":null,"type":"smoothstep","animated":false,"label":"Edge label 14","data":{"label":"Edge label 14","type":"edge"},"id":"react_edge_14","arrowHeadType":"arrow"},{"source":"dndnode_12","sourceHandle":"a","target":"dndnode_13","targetHandle":null,"type":"smoothstep","animated":false,"label":"Order Id get","data":{"label":"Order Id get","type":"edge"},"id":"react_edge_15","arrowHeadType":"arrow"},{"source":"dndnode_13","sourceHandle":"a","target":"dndnode_14","targetHandle":null,"type":"smoothstep","animated":false,"label":"Order cancelled","data":{"label":"Order cancelled","type":"edge"},"id":"react_edge_16","arrowHeadType":"arrow"},{"source":"dndnode_14","sourceHandle":"a","target":"dndnode_9","targetHandle":null,"type":"smoothstep","animated":false,"label":"Terminate","data":{"label":"Terminate","type":"edge"},"id":"react_edge_17","arrowHeadType":"arrow"}];
+  let id = 3;
+  let idedge = 3;
   const getId = () => `dndnode_${id++}`;
   const getIdEdge = function(flag=true) { 
     if(flag){
@@ -139,6 +114,16 @@ const initialElements = [
         this.setState({element:element}); 
     }   
 
+    onSaveAndPublishClick(event){
+      // console.log(this.state.reactFlowInstance.toObject().elements);
+      const element = document.createElement("a");
+      const textFile = new Blob([JSON.stringify(this.state.reactFlowInstance.toObject().elements)], {type: 'application/json'}); //pass data from localStorage API to blob
+      element.href = URL.createObjectURL(textFile);
+      element.download = "userFile.json";
+      document.body.appendChild(element); 
+      element.click();
+    }  
+
     updateEdgeText(old,newEl,type){ 
         console.log('old,newEl,type',old,newEl,type);
           // if(type){
@@ -198,6 +183,7 @@ const initialElements = [
         return (
          
             <ReactFlowProvider>
+               <Navigation publishClick={this.onSaveAndPublishClick.bind(this)}/>
                <Propwrap element={this.state.element} updateNodeCb={this.updateEdgeText.bind(this)} />
               <div className="sectionLeft dndflow reactflow-wrapper nested" ref={this.state.reactFlowWrapper}>
                <ReactFlow 

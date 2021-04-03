@@ -1,5 +1,16 @@
 import React, {Component} from 'react';
 export class Navigation extends Component {
+  constructor(props) {
+      super(props)
+      this.state ={
+          updateNodeCb:props.publishClick,
+      };
+  }
+  _download (evt) {
+    this.state.updateNodeCb();
+     
+    return true
+}
  
     render() {
         
@@ -22,7 +33,7 @@ export class Navigation extends Component {
             </div>
             <div id="buttonsright">
                 <div id="discard">Discard</div>
-                <div id="publish">Publish to site</div>
+                <div id="publish" onClick={this._download.bind(this)}>Publish to site</div>
             </div>
           </div>
         );
