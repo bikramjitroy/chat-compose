@@ -5,7 +5,8 @@ export class Propwrap extends Component {
         this.state ={
             element:props.element,
             updateNodeCb:props.updateNodeCb,
-            clicked:'dataprop'
+            clicked:'dataprop',
+            rowChip:props.element&&props.element.data.rowChip||[{image:"",text:""}]
         };
         this.updateText1 = this.updateText1.bind(this);
     }
@@ -14,7 +15,9 @@ export class Propwrap extends Component {
             this.setState({
                 element:nextProps.element,
                 updateNodeCb:nextProps.updateNodeCb,
-                clicked:'dataprop'
+                clicked:'dataprop',
+                rowChip:nextProps.element&&nextProps.element.data.rowChip||[{image:"",text:""}]
+
             });
 
             console.log('nextProps',nextProps);
@@ -45,6 +48,30 @@ export class Propwrap extends Component {
         console.log('nextPropsShould',prevProps,prevState,this.state);
     }
 
+    handleInputChange (e, index){
+        const { name, value } = e.target;
+        const list = [...this.state.rowChip];
+        list[index][name] = value;
+        this.setState({rowChip:list});
+        if(this.state.element.data.subtype==='suggestionchip'){
+            let a = {rowChip:list};
+            let obj = Object.assign({}, this.state.element.data, a);
+            this.setState({element:{...this.state.element,data:{...obj}}}); 
+        }
+      };
+     
+      // handle click event of the Remove button
+    handleRemoveClick(index){
+        const list = [...this.state.rowChip];
+        list.splice(index, 1);
+        this.setState({rowChip:list});
+      };
+     
+      // handle click event of the Add button
+    handleAddClick() {
+        this.setState({rowChip:[...this.state.rowChip, { image: "", text: "" }]});
+      };
+
     _handleClick(evt){
         this.setState({clicked:evt.target.id})
     }
@@ -55,18 +82,24 @@ export class Propwrap extends Component {
     }
         
     handlerChange(evt){
+        
         if(evt.target.id==='id_label'){
         this.setState({element:{...this.state.element,label:evt.target.value,data:{...this.state.element.data,label:evt.target.value}}});
         }else{
             let a = {};
             a[evt.target.id]=evt.target.value;
+            
             var obj = Object.assign({}, this.state.element.data, a);
+            
             this.setState({element:{...this.state.element,data:{...obj}}}); 
         }
     }
     updateText1 (evt) {
         // this.setState({clicked:true});
         if(this.state.element){
+            
+           console.log('called');
+            console.log('inside',this.state.element);
             let elemetOld = this.props.element;
             let newLabel = this.state.element;
             // this.setProps({element:this.state.element});
@@ -127,7 +160,7 @@ export class Propwrap extends Component {
                         <p id="header2">Properties</p>
                         <div id="propswitch">
                             <div id="dataprop" className={this.state.clicked==='dataprop' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>Data</div>
-                            <div id="alertprop" className={this.state.clicked==='alertprop' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>Alerts</div>
+                            <div id="alertprop" className={this.state.clicked==='alertprop' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>Configuration</div>
                             <div id="logsprop" className={this.state.clicked==='logsprop' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>Logs</div>
                         </div>
                         <div className={this.state.clicked==='dataprop' ? 'proplist' : "proplist hidden"}>
@@ -143,7 +176,38 @@ export class Propwrap extends Component {
                             <div className="checkus"><img src="assets/checkoff.svg" alt="checkoff"/><p>Give priority to this block</p></div> */}
                         </div>
                         <div className={this.state.clicked==='alertprop' ? 'proplist' : "proplist hidden"}>
-                            <div className="checkus"><p>Development inprogress</p></div>
+                            <div className="checkus"><p></p></div>
+                            {this.state.element&&this.state.element.data&&this.state.element.data.subtype==='suggestionchip'&&this.state.rowChip.map((x, i) => {
+                                    return (
+                                    <div className="box">
+                                        <p className="inputlabel">Image</p>
+                                        <input
+                                        name="image"
+                                        className="dropme"
+                            placeholder="Enter Image url"
+                                        value={x.image}
+                                        onChange={e => this.handleInputChange(e, i)}
+                                        />
+                                        <p className="inputlabel">Suggestion Text</p>
+                                        <input
+                                        className="dropme"
+                                        name="text"
+                            placeholder="Enter Suggestion Text"
+                                        value={x.text}
+                                        onChange={e => this.handleInputChange(e, i)}
+                                        />
+                                        <div className="btn-box">
+                                        {this.state.rowChip.length !== 1 && <button
+                                            className="mr10"
+                                            onClick={() => this.handleRemoveClick(i)}>Remove</button>}
+                                        {this.state.rowChip.length - 1 === i && <button onClick={this.handleAddClick.bind(this)}>Add</button>}
+                                        </div>
+                                    </div>
+                                    );
+                                })}
+                                      {/* <div style={{ marginTop: 20 }}>{JSON.stringify(this.state)}</div> */}
+
+                                
                         </div>
                         <div className={this.state.clicked==='logsprop' ? 'proplist' : "proplist hidden"}>
                             <div className="checkus"><p>Development inprogress</p></div>
