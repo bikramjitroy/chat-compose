@@ -29,7 +29,9 @@ export class Propwrap extends Component {
             this.setState({
                 element:prevProps.element,
                 updateNodeCb:prevProps.updateNodeCb,
-                clicked:'dataprop'
+                clicked:'dataprop',
+                rowChip:prevProps.element&&prevProps.element.data.rowChip||[{image:"",text:""}]
+
             });
         }
         
