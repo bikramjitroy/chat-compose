@@ -587,12 +587,11 @@ body, html {
 }
 .blockyname {
     font-family: Roboto;
-    font-weight: 500;
     color: #253134;
     display: inline-block;
     vertical-align: middle;
     margin-left: 8px;
-    font-size: 16px;
+    font-size: 8px;
 }
 .blockyleft img {
     display: inline-block;
@@ -611,6 +610,7 @@ body, html {
     background-color: #FFF;
     transition: all .3s cubic-bezier(.05,.03,.35,1);
     z-index: 10;
+    font-weight: 500;
 }
 .blockyright:hover {
     background-color: #F1F4FC;
@@ -686,3 +686,9 @@ body, html {
 }
 
 .hidden { display:none; }
+.userInput {
+    background-color: lightgreen;
+}
+.botInput {
+    background-color: lightblue;
+}

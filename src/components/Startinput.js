@@ -6,14 +6,14 @@ export default memo(({ data }) => {
   return (
     <>
       
-      <div className="blockelem noselect block">
+      <div className="blockelem noselect block botInput">
             <div className="blockyleft">
                 <img src={`assets/${data.image.split('.').join('blue.')}`} alt={data.image}/>
     <p className="blockyname">{data.label}</p>
             </div>
-            <div className="blockyright">
+            {/* <div className="blockyright">
                 <img src="assets/more.svg" alt="1"/>
-            </div>
+            </div> */}
             <div className="blockydiv">
             </div>
             <div className="blockyinfo">

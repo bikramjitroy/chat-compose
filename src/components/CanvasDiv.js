@@ -12,14 +12,16 @@ import {Navigation} from './Navigation'
 import TwoInput from './Twoinput';
 import StartInput from './Startinput';
 import Stopinput from './Stopinput';
+import Userinput from './Userinput';
 import data from './userFile.json'; 
 const nodeTypes = {
   selectorInput: TwoInput,
   selectorNodeStart: StartInput,
   selectorStop: Stopinput,
+  selectorUserInput: Userinput
 };
 
-console.log(data);
+
 let id = 0;
   let idedge = 0;
   const getId = () => `dndnode_${id++}`;

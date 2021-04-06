@@ -10,8 +10,8 @@ const json = {"send":{'title':'Bot Send','elements':[
     {'label':'Suggestion Cips','description':'Triggers when somebody visits a specified page','type':'selectorInput','subtype':'suggestionchip','image':'error.svg'},
     {'label':'Carousel Cips','description':'Triggers when somebody visits a specified page','type':'selectorInput','subtype':'carousel','image':'error.svg'},
     ]},"receive":{'title':'Bot Recevies','elements':[
-        {'label':'User Input','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'eye.svg'},
-        {'label':'Attribute','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg'},
+        {'label':'User Input','description':'Triggers when somebody visits a specified page','type':'selectorUserInput','image':'eye.svg'},
+        {'label':'Attribute','description':'Triggers when somebody visits a specified page','type':'selectorUserInput','image':'action.svg'},
         ]},"action":{'title':'Bot Actions','elements':[
             {'label':'Start','description':'Triggers when somebody visits a specified page','type':'selectorNodeStart','image':'eye.svg'},
             {'label':'To Agent','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg'},
