@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Editor from "@monaco-editor/react";
 export class Propwrap extends Component {
     constructor(props) {
         super(props)
@@ -6,7 +7,10 @@ export class Propwrap extends Component {
             element:props.element,
             updateNodeCb:props.updateNodeCb,
             clicked:'dataprop',
-            rowChip:props.element&&props.element.data.rowChip||[{image:"",text:"",description:""}]
+            rowChip:(props.element&&props.element.data.rowChip)||[{image:"",text:"",description:""}],
+            theme:"light",
+            language:"javascript",
+            isEditorReady:false
         };
         this.updateText1 = this.updateText1.bind(this);
     }
@@ -16,7 +20,7 @@ export class Propwrap extends Component {
                 element:nextProps.element,
                 updateNodeCb:nextProps.updateNodeCb,
                 clicked:'dataprop',
-                rowChip:nextProps.element&&nextProps.element.data.rowChip||[{image:"",text:"",description:""}]
+                rowChip:(nextProps.element&&nextProps.element.data.rowChip)||[{image:"",text:"",description:""}]
 
             });
 
@@ -30,7 +34,7 @@ export class Propwrap extends Component {
                 element:prevProps.element,
                 updateNodeCb:prevProps.updateNodeCb,
                 clicked:'dataprop',
-                rowChip:prevProps.element&&prevProps.element.data.rowChip||[{image:"",text:"",description:""}]
+                rowChip:(prevProps.element&&prevProps.element.data.rowChip)||[{image:"",text:"",description:""}]
 
             });
         }
@@ -38,18 +42,7 @@ export class Propwrap extends Component {
         console.log('nextPropswill',prevProps,prevState,this.state);
     }
 
-    componentShouldUpdate(prevProps, prevState){
-        // if(prevState.element&&this.state.element&&(prevState.element.label!=this.state.element.label)){
-        //     this.setState({
-        //         element:prevState.element,
-        //         updateNodeCb:prevState.updateNodeCb,
-        //         clicked:false
-        //     });
-        // }
-        
-        console.log('nextPropsShould',prevProps,prevState,this.state);
-    }
-
+    
     handleInputChange (e, index){
         const { name, value } = e.target;
         const list = [...this.state.rowChip];
@@ -116,6 +109,9 @@ export class Propwrap extends Component {
 
         return true
     }
+    handleEditorDidMount() {
+        this.setState({isEditorReady:true});
+      }
 
     render() {
         if(this.state.element&&this.state.element.data.type === 'edge') {
@@ -179,9 +175,9 @@ export class Propwrap extends Component {
                         </div>
                         <div className={this.state.clicked==='alertprop' ? 'proplist' : "proplist hidden"}>
                             <div className="checkus"><p></p></div>
-                            {this.state.element&&this.state.element.data&&(this.state.element.data.subtype==='suggestionchip'||this.state.element.data.subtype==='carousel')&&this.state.rowChip.map((x, i) => {
+                            {(this.state.element&&this.state.element.data)&&(this.state.element.data.subtype==='suggestionchip'||this.state.element.data.subtype==='carousel')&&this.state.rowChip.map((x, i) => {
                                     return (
-                                    <div className="box">
+                                    <div key={`card_`+i} className="box">
                                         {this.state.element&&this.state.element.data&&this.state.element.data.subtype==='carousel'&& 
                                         <span><p className="inputlabel">Image</p><input
                                         name="image"
@@ -224,7 +220,18 @@ export class Propwrap extends Component {
                                 
                         </div>
                         <div className={this.state.clicked==='logsprop' ? 'proplist' : "proplist hidden"}>
-                            <div className="checkus"><p>Development inprogress</p></div>
+                            <div>
+                            <Editor
+                                height="490vh" // By default, it fully fits with its parent
+                                theme={this.state.theme}
+                                language={this.state.language}
+                                value={'Place code here'}
+                                name="editor"
+                                editorDidMount={this.handleEditorDidMount.bind(this)}
+                                onChange={e => this.handleInputChange(e, 'editor')}
+                                loading={"Loading..."}
+                            />
+                            </div>
                         </div>
                         <div id="divisionthing"></div>
                         <div id="Saveblock" onClick={this.updateText1.bind(this)}>Save</div>

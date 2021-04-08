@@ -87,16 +87,16 @@ export class Leftcard extends Component {
                 </div>
                 <div id="subnav">
                 {Object.keys(this.state.elemetArray).map((e, i) => {
-                   return(<div id={e} className={this.state.activeClass===e ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>{this.state.elemetArray[e].title}</div> )
+                   return(<div id={e} key={`menu_`+i} className={this.state.activeClass===e ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>{this.state.elemetArray[e].title}</div> )
                     
                 })}
                 </div>
                 {Object.keys(this.state.elemetArray).map((e, i) => {
                 return (
-                <div id={`blocklist${++i} ${e}`} className={this.state.activeClass===e ? 'blocklist' : 'hidden blocklist'}>
+                <div id={`blocklist${++i} ${e}`} key={`menu_compo`+i}  className={this.state.activeClass===e ? 'blocklist' : 'hidden blocklist'}>
                     {this.state.elemetArray[e].elements.map((item, iNested) => {
                     return (
-                        <div className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, item.type,JSON.stringify(item))}  draggable>
+                        <div key={`menu_compo`+i+'_'+iNested} className="blockelem create-flowy noselect" onDragStart={(event) => this.onDragStart(event, item.type,JSON.stringify(item))}  draggable>
                             <div className="grabme">
                                 <img src="assets/grabme.svg" alt="grabme"/>
                             </div>
