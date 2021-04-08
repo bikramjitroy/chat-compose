@@ -6,7 +6,7 @@ export class Propwrap extends Component {
             element:props.element,
             updateNodeCb:props.updateNodeCb,
             clicked:'dataprop',
-            rowChip:props.element&&props.element.data.rowChip||[{image:"",text:""}]
+            rowChip:props.element&&props.element.data.rowChip||[{image:"",text:"",description:""}]
         };
         this.updateText1 = this.updateText1.bind(this);
     }
@@ -16,7 +16,7 @@ export class Propwrap extends Component {
                 element:nextProps.element,
                 updateNodeCb:nextProps.updateNodeCb,
                 clicked:'dataprop',
-                rowChip:nextProps.element&&nextProps.element.data.rowChip||[{image:"",text:""}]
+                rowChip:nextProps.element&&nextProps.element.data.rowChip||[{image:"",text:"",description:""}]
 
             });
 
@@ -30,7 +30,7 @@ export class Propwrap extends Component {
                 element:prevProps.element,
                 updateNodeCb:prevProps.updateNodeCb,
                 clicked:'dataprop',
-                rowChip:prevProps.element&&prevProps.element.data.rowChip||[{image:"",text:""}]
+                rowChip:prevProps.element&&prevProps.element.data.rowChip||[{image:"",text:"",description:""}]
 
             });
         }
@@ -71,7 +71,7 @@ export class Propwrap extends Component {
      
       // handle click event of the Add button
     handleAddClick() {
-        this.setState({rowChip:[...this.state.rowChip, { image: "", text: "" }]});
+        this.setState({rowChip:[...this.state.rowChip, { image: "", text: "",description:"" }]});
       };
 
     _handleClick(evt){
@@ -182,20 +182,32 @@ export class Propwrap extends Component {
                             {this.state.element&&this.state.element.data&&(this.state.element.data.subtype==='suggestionchip'||this.state.element.data.subtype==='carousel')&&this.state.rowChip.map((x, i) => {
                                     return (
                                     <div className="box">
-                                        <p className="inputlabel">Image</p>
-                                        <input
+                                        {this.state.element&&this.state.element.data&&this.state.element.data.subtype==='carousel'&& 
+                                        <span><p className="inputlabel">Image</p><input
                                         name="image"
                                         className="dropme"
                             placeholder="Enter Image url"
                                         value={x.image}
                                         onChange={e => this.handleInputChange(e, i)}
-                                        />
+                                    />
+                                    {x.image===''? <div className="thumbnail"></div>:<div className="thumbnail"><img src={x.image} alt=""/></div>}   
+                                    </span> 
+                                    
+                                    }
                                         <p className="inputlabel">Suggestion Text</p>
                                         <input
                                         className="dropme"
                                         name="text"
                             placeholder="Enter Suggestion Text"
                                         value={x.text}
+                                        onChange={e => this.handleInputChange(e, i)}
+                                        />
+                                        <p className="inputlabel">Suggestion description</p>
+                                        <input
+                                        className="dropme"
+                                        name="description"
+                            placeholder="Enter Suggestion description"
+                                        value={x.description}
                                         onChange={e => this.handleInputChange(e, i)}
                                         />
                                         <div className="btn-box">
