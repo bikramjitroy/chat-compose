@@ -24,12 +24,12 @@ const nodeTypes = {
 
 let id = 0;
   let idedge = 0;
-  const getId = () => `dndnode_${id++}`;
+  const getId = () => `dndnode1_${id++}`;
   const getIdEdge = function(flag=true) { 
     if(flag){
-        return `${++idedge}`
+        return `edge_${++idedge}`
     }  
-    return `${idedge}`
+    return `edge_${idedge}`
     } ;
   
   
@@ -106,7 +106,7 @@ let id = 0;
         position,
         label: `${elementCreate.label}`,
         
-        data: { label: `${elementCreate.label}`,description: `${elementCreate.description}`,'subtype':`${elementCreate.subtype||''}`,type:"node",'image':elementCreate.image },
+        data: { label: `${elementCreate.label}`,description: `${elementCreate.description}`,'subtype':`${elementCreate.subtype||''}`,type:"node",'image':elementCreate.image,'class':elementCreate.class },
       };
       console.log('newNode',newNode,event.dataTransfer);
   
