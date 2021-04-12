@@ -109,6 +109,15 @@ export class Propwrap extends Component {
 
         return true
     }
+    handleChange(e){
+        let a = {};
+        a[e.target.id]=e.target.value;
+        
+        var obj = Object.assign({}, this.state.element.data, a);
+        console.log(obj);
+        this.setState({element:{...this.state.element,data:{...obj}}}); 
+        // this.setState({selectValue:e.target.value});
+    }
     handleEditorDidMount() {
         this.setState({isEditorReady:true});
       }
@@ -130,7 +139,42 @@ export class Propwrap extends Component {
                         <div className={this.state.clicked==='dataprop' ? 'proplist' : "proplist hidden"}>
                             <p className="inputlabel">Name</p>
                             <input className="dropme" id='id_label' type="text" value={(this.state.element&&this.state.element.data&&this.state.element.data.label)||''} onChange={this.handlerChange.bind(this)}/>
+                            <p className="inputlabel">Edge Type</p>
+                            <select className="dropme" id="edgeType"
+                                value={(this.state.element&&this.state.element.data&&this.state.element.data.edgeType)||'Valueset'} 
+                                onChange={this.handleChange.bind(this)} 
+                            >
+                                <option value="Valueset">Valueset</option>
+                                <option value="Comparison">Comparison</option>
+                            </select>
                             
+                            {(() => {
+                                if ((this.state.element&&this.state.element.data)&&this.state.element.data.edgeType==='Comparison') {
+                                return (
+                                    <>
+                                    <p className="inputlabel">Comparison Type</p>
+                                    <select className="dropme" id="comparisonOperator"
+                                        value={(this.state.element&&this.state.element.data&&this.state.element.data.comparisonOperator)||'=='} 
+                                        onChange={this.handleChange.bind(this)} 
+                                    >
+                                        <option value="<=">&#60;=</option>
+                                        <option value="==">==</option>
+                                        <option value="!=">!=</option>
+                                        <option value="=>">=></option>
+                                        <option value=">">&#62;</option>
+                                        <option value="<">&#60;</option>
+                                    </select>
+                                    <p className="inputlabel">Comparison Value</p>
+                                    <input className="dropme" id='comparisonValue' type="text" value={(this.state.element&&this.state.element.data&&this.state.element.data.comparisonValue)||''} onChange={this.handlerChange.bind(this)}/>
+
+                                    </>
+                                )
+                                } else {
+                                return (
+                                    <></>
+                                )
+                                }
+                            })()}
                             {/* <p className="inputlabel">Check properties</p>
                             {JSON.stringify(this.state.element)}
                             <div className="dropme">All<img src="assets/dropdown.svg" alt="all"/></div>
@@ -221,7 +265,7 @@ export class Propwrap extends Component {
                         </div>
                         <div className={this.state.clicked==='logsprop' ? 'proplist' : "proplist hidden"}>
                             <div>
-                            <Editor
+                            {/* <Editor
                                 height="490vh" // By default, it fully fits with its parent
                                 theme={this.state.theme}
                                 language={this.state.language}
@@ -230,7 +274,7 @@ export class Propwrap extends Component {
                                 editorDidMount={this.handleEditorDidMount.bind(this)}
                                 onChange={e => this.handleInputChange(e, 'editor')}
                                 loading={"Loading..."}
-                            />
+                            /> */}
                             </div>
                         </div>
                         <div id="divisionthing"></div>
