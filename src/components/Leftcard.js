@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
 
 const json = {"send":{'title':'Bot Send','elements':[
-    {'label':'Text','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'eye.svg',"class":"lightBlue"},
-    {'label':'Image','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg',"class":"lightBlue"},
-    {'label':'Document','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'time.svg',"class":"lightBlue"},
-    {'label':'Audio','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'error.svg',"class":"lightBlue"},
-    {'label':'Video','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'error.svg',"class":"lightBlue"},
-    {'label':'Location','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'error.svg',"class":"lightBlue"},
-    {'label':'Suggestion Cips','description':'Triggers when somebody visits a specified page','type':'selectorInput','subtype':'suggestionchip','image':'error.svg',"class":"lightBlue"},
-    {'label':'Carousel Cips','description':'Triggers when somebody visits a specified page','type':'selectorInput','subtype':'carousel','image':'error.svg',"class":"lightBlue"},
+    {'label':'Text','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'eye.svg',"class":"blockyBlue"},
+    {'label':'Image','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg',"class":"blockyBlue"},
+    {'label':'Document','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'time.svg',"class":"blockyBlue"},
+    {'label':'Audio','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'error.svg',"class":"blockyBlue"},
+    {'label':'Video','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'error.svg',"class":"blockyBlue"},
+    {'label':'Location','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'error.svg',"class":"blockyBlue"},
+    {'label':'Suggestion Cips','description':'Triggers when somebody visits a specified page','type':'selectorInput','subtype':'suggestionchip','image':'error.svg',"class":"blockyBlue"},
+    {'label':'Carousel Cips','description':'Triggers when somebody visits a specified page','type':'selectorInput','subtype':'carousel','image':'error.svg',"class":"blockyBlue"},
     ]},"receive":{'title':'Bot Recevies','elements':[
-        {'label':'User Input','description':'Triggers when somebody visits a specified page','type':'selectorUserInput','image':'eye.svg',"class":"lightGreen"},
-        {'label':'Attribute','description':'Triggers when somebody visits a specified page','type':'selectorUserInput','image':'action.svg',"class":"lightGreen"},
+        {'label':'User Input','description':'Triggers when somebody visits a specified page','type':'selectorUserInput','image':'eye.svg',"class":"blockyGreen"},
+        {'label':'Attribute','description':'Triggers when somebody visits a specified page','type':'selectorUserInput','image':'action.svg',"class":"blockyGreen"},
         ]},"action":{'title':'Bot Actions','elements':[
-            {'label':'Start','description':'Triggers when somebody visits a specified page','type':'selectorNodeStart','image':'eye.svg',"class":"blockyGrey"},
+            {'label':'Start','description':'Start Point','type':'selectorNodeStart','image':'eye.svg',"class":"blockyGrey"},
             {'label':'To Agent','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg',"class":"blockyGrey"},
             {'label':'Api Calling','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg',"class":"blockyGrey"},
             {'label':'Coding','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg',"class":"blockyGrey"},

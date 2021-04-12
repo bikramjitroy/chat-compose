@@ -22,9 +22,9 @@ const nodeTypes = {
 };
 
 
-let id = 0;
+let id = 1;
   let idedge = 0;
-  const getId = () => `dndnode1_${id++}`;
+  const getId = () => `dndnode_${id++}`;
   const getIdEdge = function(flag=true) { 
     if(flag){
         return `edge_${++idedge}`
