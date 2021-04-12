@@ -741,3 +741,6 @@ body, html {
     width: 60px;
     height: 60px;
 }
+.react-flow__controls{
+    left:3%
+}
