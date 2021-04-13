@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "https://vdev.ameyo.net:8786/chat-compose/buld/static/css/main.e0dbb7a0.chunk.css",
-    "main.js": "https://vdev.ameyo.net:8786/chat-compose/buld/static/js/main.b8db84af.chunk.js",
-    "main.js.map": "https://vdev.ameyo.net:8786/chat-compose/buld/static/js/main.b8db84af.chunk.js.map",
+    "main.js": "https://vdev.ameyo.net:8786/chat-compose/buld/static/js/main.7193624f.chunk.js",
+    "main.js.map": "https://vdev.ameyo.net:8786/chat-compose/buld/static/js/main.7193624f.chunk.js.map",
     "runtime-main.js": "https://vdev.ameyo.net:8786/chat-compose/buld/static/js/runtime-main.3c32b242.js",
     "runtime-main.js.map": "https://vdev.ameyo.net:8786/chat-compose/buld/static/js/runtime-main.3c32b242.js.map",
     "static/js/2.16158db6.chunk.js": "https://vdev.ameyo.net:8786/chat-compose/buld/static/js/2.16158db6.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.3c32b242.js",
     "static/js/2.16158db6.chunk.js",
     "static/css/main.e0dbb7a0.chunk.css",
-    "static/js/main.b8db84af.chunk.js"
+    "static/js/main.7193624f.chunk.js"
   ]
 }
