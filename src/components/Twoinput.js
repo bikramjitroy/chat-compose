@@ -7,7 +7,7 @@ export default memo(({ data }) => {
     <>
       
       <div className="blockelem noselect block botInput">
-      <Handle type="target" position="top" style={{ borderRadius: 0 }} />
+      <Handle type="target" id="a" position="top" style={{ borderRadius: 0 }} />
             <div className={data.class||'blockyBlue'}>
               <div className="blockyleft">
               <img src={`assets/${data.image.split('.').join('blue.')}`} alt={data.image}/>
@@ -24,21 +24,22 @@ export default memo(({ data }) => {
             </div>
       <Handle
         type="source"
+        id="b"
         position="bottom"
         style={{ borderRadius: 0 }}
       />
-      {/* <Handle
+      <Handle
         type="target"
+        id="c"
         position="right"
-        id='b'
-        style={{ top: 10, background: '#555' }}
+        style={{ top: '50%', borderRadius: 0  }}
       />
       <Handle
         type="target"
-        position="right"
-        id='c'
-        style={{ bottom: 10, top: 'auto', background: '#555' }}
-      /> */}
+        id="d"
+        position="left"
+        style={{ top: '50%', borderRadius: 0  }}
+      />
     </div>
       
     </>
