@@ -109,6 +109,11 @@ export class Propwrap extends Component {
 
         return true
     }
+    handleChangeSpace(e) {
+        if (e.key === " ") {
+            e.preventDefault();
+          }
+      };
     handleChange(e){
         let a = {};
         a[e.target.id]=e.target.value;
@@ -207,9 +212,40 @@ export class Propwrap extends Component {
                         </div>
                         <div className={this.state.clicked==='dataprop' ? 'proplist' : "proplist hidden"}>
                             <p className="inputlabel">Name</p>
-                            <input className="dropme" id='id_label' type="text" value={(this.state.element&&this.state.element.data&&this.state.element.data.label)||''} onChange={this.handlerChange.bind(this)}/>
-                            <p className="inputlabel">Description</p>
+                            <input className="dropme" id='var_name' type="text" value={(this.state.element&&this.state.element.data&&(this.state.element.data.var_name||this.state.element.id))||''} onChange={this.handlerChange.bind(this)}/>
+                            <p className="inputlabel">Message Body</p>
                             <textarea className="dropmetextarea" id='description' value={(this.state.element&&this.state.element.data&&this.state.element.data.description)||''} onChange={this.handlerChange.bind(this)}></textarea>
+                            {(() => {
+                                if (this.state.element&&this.state.element.data&&this.state.element.data.subtype==='multimedia') {
+                                return (
+                                    <>
+                                    <p className="inputlabel">Media Type</p>
+                                    <select className="dropme" id="mediaType"
+                                        value={(this.state.element&&this.state.element.data&&this.state.element.data.mediaType)||'Image'} 
+                                        onChange={this.handleChange.bind(this)} 
+                                    >
+                                        <option value="Image">Image</option>
+                                        <option value="Audio">Audio</option>
+                                        <option value="Document">Document</option>
+                                        <option value="Video">Video</option>
+                                    </select>
+                                    <p className="inputlabel">Media Url</p>
+                                    <input
+                                        name="mediaUrl"
+                                        className="dropme"
+                                        placeholder="Enter Media url"
+                                        value={this.state.element.data.mediaUrl}
+                                        onChange={this.handleChange.bind(this)}
+                                        />
+                                    </>
+                                )
+                                } else {
+                                return (
+                                    <></>
+                                )
+                                }
+                            })()}
+                            
                             
                             {/* <p className="inputlabel">Check properties</p>
                             {JSON.stringify(this.state.element)}
@@ -234,20 +270,25 @@ export class Propwrap extends Component {
                                     </span> 
                                     
                                     }
-                                        <p className="inputlabel">Suggestion Text</p>
+                                        <p className="inputlabel">Display Text</p>
                                         <input
                                         className="dropme"
                                         name="text"
-                            placeholder="Enter Suggestion Text"
+                            placeholder="Enter Suggestion Text  Max 25 Char"
                                         value={x.text}
+                                        maxLength="25"
+                                        autoComplete="off"
                                         onChange={e => this.handleInputChange(e, i)}
                                         />
-                                        <p className="inputlabel">Suggestion description</p>
+                                        <p className="inputlabel">Postback Text</p>
                                         <input
                                         className="dropme"
                                         name="description"
-                            placeholder="Enter Suggestion description"
+                            placeholder="Enter Postback Text  Max 25 Char"
                                         value={x.description}
+                                        autoComplete="off"
+                                        maxLength="25"
+                                        onKeyDown={this.handleChangeSpace.bind(this)}
                                         onChange={e => this.handleInputChange(e, i)}
                                         />
                                         <div className="btn-box">

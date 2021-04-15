@@ -75,7 +75,21 @@ const nodeTypes = {
       this.setState({elements:addEdge({ ...params, type: 'smoothstep', animated: false,label: 'Edge label '+getIdEdge(),data:{label: 'Edge label '+getIdEdge(false),type:"edge"}, id:'react_edge_'+getIdEdge(false),arrowHeadType: 'arrow' }, this.state.elements)});
     }
     onElementsRemove(elementsToRemove){ 
-      this.setState({elements:removeElements(elementsToRemove, this.state.elements)});
+      console.log('remove',elementsToRemove);
+      if(elementsToRemove[0]['type']!=="selectorNodeStart"){
+        this.setState({elements:removeElements(elementsToRemove, this.state.elements)});
+      }else{
+        confirmAlert({
+          title: 'Alert',
+          message: "You Can't remove start node.",
+          buttons: [
+            {
+              label: 'Ok'
+            }
+          ]
+        });
+      }
+      
     };  
     onLoad(_reactFlowInstance){
       console.log('load');
