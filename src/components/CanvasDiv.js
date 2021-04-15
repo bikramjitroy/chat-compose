@@ -14,6 +14,9 @@ import StartInput from './Startinput';
 import Stopinput from './Stopinput';
 import Userinput from './Userinput';
 import data from './userFile.json'; 
+import ls from 'local-storage'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 const nodeTypes = {
   selectorInput: TwoInput,
   selectorNodeStart: StartInput,
@@ -22,7 +25,7 @@ const nodeTypes = {
 };
 
 
-let id = 1;
+  let id = 1;
   let idedge = 0;
   const getId = () => `dndnode_${id++}`;
   const getIdEdge = function(flag=true) { 
@@ -75,8 +78,49 @@ let id = 1;
       this.setState({elements:removeElements(elementsToRemove, this.state.elements)});
     };  
     onLoad(_reactFlowInstance){
+      console.log('load');
+      this.resumeLoadContent();
       this.setState({reactFlowInstance:_reactFlowInstance});
       _reactFlowInstance.fitView();
+    }
+
+    resumeLoadContent(){
+      if(ls.get("readLater")){
+        confirmAlert({
+          title: 'Confirm to Resume',
+          message: 'Do you want to resume work from last drafted project.',
+          buttons: [
+            {
+              label: 'Yes',
+              onClick: () => {
+                this.setState({elements:ls.get("readLater")});
+                id=ls.get("node_id");
+                idedge=ls.get("edge_id");
+                console.log(id,idedge);
+                this.callIntervalFunc();
+              }
+            },
+            {
+              label: 'No',
+              onClick: () => {
+                this.callIntervalFunc();
+              }
+            }
+          ]
+        });
+      }else{
+        this.callIntervalFunc()
+      }
+    }
+    callIntervalFunc(){
+      this.timer = setInterval(() => {
+         
+        ls.set('readLater', this.state.reactFlowInstance.toObject().elements);
+        ls.set('node_id', id);
+        ls.set('edge_id', idedge);
+        console.log(123,this.state.reactFlowInstance.toObject().elements)
+        // this.setState({ seconds: this.state.seconds + 1 });
+      }, 1000);
     }
 
     onDragOver(event){
@@ -137,6 +181,10 @@ let id = 1;
           // }
           this.setState({element:null});
           
+        
+      }
+      componentDidMount() {
+
         
       }
 
