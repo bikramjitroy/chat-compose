@@ -6,14 +6,14 @@ const json = {"send":{'title':'Bot Send','elements':[
     {'label':'Suggestion Cips','description':'Triggers when somebody visits a specified page','type':'selectorInput','subtype':'suggestionchip','image':'time.svg',"class":"blockyBlue"},
     {'label':'Carousel Cips','description':'Triggers when somebody visits a specified page','type':'selectorInput','subtype':'carousel','image':'error.svg',"class":"blockyBlue"},
     ]},"receive":{'title':'Bot Recevies','elements':[
-        {'label':'User Input','description':'Triggers when somebody visits a specified page','type':'selectorUserInput','image':'eye.svg',"class":"blockyGreen"},
-        {'label':'Attribute','description':'Triggers when somebody visits a specified page','type':'selectorUserInput','image':'action.svg',"class":"blockyGreen"},
+        {'label':'User Input','description':'Triggers when somebody visits a specified page','type':'selectorUserInput','image':'eye.svg','subtype':'userinput',"class":"blockyGreen"},
+        {'label':'Attribute','description':'Triggers when somebody visits a specified page','type':'selectorUserInput','image':'action.svg','subtype':'userattribute',"class":"blockyGreen"},
         ]},"action":{'title':'Bot Actions','elements':[
             // {'label':'Start','description':'Start Point','type':'selectorNodeStart','image':'eye.svg',"class":"blockyGrey"},
-            {'label':'To Agent','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg',"class":"blockyGrey"},
-            {'label':'Api Calling','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg',"class":"blockyGrey"},
-            {'label':'Script Node','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg',"class":"blockyGrey"},
-            {'label':'Close','description':'Triggers when somebody visits a specified page','type':'selectorStop','image':'terminate.svg',"class":"blockyRed"},
+            {'label':'To Agent','subtype':'toagent','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg',"class":"blockyGrey"},
+            {'label':'Api Calling','subtype':'apicalling','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg',"class":"blockyGrey"},
+            {'label':'Script Node','subtype':'scriptnode','description':'Triggers when somebody visits a specified page','type':'selectorInput','image':'action.svg',"class":"blockyGrey"},
+            {'label':'Close','subtype':'closenode','description':'Triggers when somebody visits a specified page','type':'selectorStop','image':'terminate.svg',"class":"blockyRed"},
             ]}};
     
 export class Leftcard extends Component {
