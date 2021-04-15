@@ -118,9 +118,9 @@ const nodeTypes = {
         ls.set('readLater', this.state.reactFlowInstance.toObject().elements);
         ls.set('node_id', id);
         ls.set('edge_id', idedge);
-        console.log(123,this.state.reactFlowInstance.toObject().elements)
+        // console.log(123,this.state.reactFlowInstance.toObject().elements)
         // this.setState({ seconds: this.state.seconds + 1 });
-      }, 1000);
+      }, 10000);
     }
 
     onDragOver(event){
