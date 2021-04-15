@@ -115,12 +115,12 @@ const nodeTypes = {
     callIntervalFunc(){
       this.timer = setInterval(() => {
          
-        ls.set('readLater', this.state.reactFlowInstance.toObject().elements);
+        ls.set('readLater', this.state.elements);
         ls.set('node_id', id);
         ls.set('edge_id', idedge);
         // console.log(123,this.state.reactFlowInstance.toObject().elements)
         // this.setState({ seconds: this.state.seconds + 1 });
-      }, 10000);
+      }, 5000);
     }
 
     onDragOver(event){
