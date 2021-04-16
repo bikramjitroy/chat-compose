@@ -232,6 +232,7 @@ export class Propwrap extends Component {
                                     <p className="inputlabel">Media Url</p>
                                     <input
                                         name="mediaUrl"
+                                        id="mediaUrl"
                                         className="dropme"
                                         placeholder="Enter Media url"
                                         value={this.state.element.data.mediaUrl}
