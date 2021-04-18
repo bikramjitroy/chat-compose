@@ -211,8 +211,6 @@ export class Propwrap extends Component {
                             <div id="logsprop" className={this.state.clicked==='logsprop' ? 'navactive side' : "navdisabled side"} onClick={this._handleClick.bind(this)}>Logs</div>
                         </div>
                         <div className={this.state.clicked==='dataprop' ? 'proplist' : "proplist hidden"}>
-                            <p className="inputlabel">Name</p>
-                            <input className="dropme" id='var_name' type="text" value={(this.state.element&&this.state.element.data&&(this.state.element.data.var_name||this.state.element.id))||''} onChange={this.handlerChange.bind(this)}/>
                             <p className="inputlabel">Message Body</p>
                             <textarea className="dropmetextarea" id='description' value={(this.state.element&&this.state.element.data&&this.state.element.data.description)||''} onChange={this.handlerChange.bind(this)}></textarea>
                             {(() => {
@@ -246,16 +244,6 @@ export class Propwrap extends Component {
                                 )
                                 }
                             })()}
-                            
-                            
-                            {/* <p className="inputlabel">Check properties</p>
-                            {JSON.stringify(this.state.element)}
-                            <div className="dropme">All<img src="assets/dropdown.svg" alt="all"/></div>
-                            <div className="checkus"><img src="assets/checkon.svg" alt="checkon"/><p>Log on successful performance</p></div>
-                            <div className="checkus"><img src="assets/checkoff.svg" alt="checkoff"/><p>Give priority to this block</p></div> */}
-                        </div>
-                        <div className={this.state.clicked==='alertprop' ? 'proplist' : "proplist hidden"}>
-                            <div className="checkus"><p></p></div>
                             {(this.state.element&&this.state.element.data)&&(this.state.element.data.subtype==='suggestionchip'||this.state.element.data.subtype==='carousel')&&this.state.rowChip.map((x, i) => {
                                     return (
                                     <div key={`card_`+i} className="box">
@@ -301,6 +289,19 @@ export class Propwrap extends Component {
                                     </div>
                                     );
                                 })}
+                            
+                            {/* <p className="inputlabel">Check properties</p>
+                            {JSON.stringify(this.state.element)}
+                            <div className="dropme">All<img src="assets/dropdown.svg" alt="all"/></div>
+                            <div className="checkus"><img src="assets/checkon.svg" alt="checkon"/><p>Log on successful performance</p></div>
+                            <div className="checkus"><img src="assets/checkoff.svg" alt="checkoff"/><p>Give priority to this block</p></div> */}
+                        </div>
+                        <div className={this.state.clicked==='alertprop' ? 'proplist' : "proplist hidden"}>
+                            <p className="inputlabel">Name</p>
+                            <input className="dropme" id='var_name' type="text" value={(this.state.element&&this.state.element.data&&(this.state.element.data.var_name||this.state.element.id))||''} onChange={this.handlerChange.bind(this)}/>
+                            
+                            <div className="checkus"><p></p></div>
+                            
                                       {/* <div style={{ marginTop: 20 }}>{JSON.stringify(this.state)}</div> */}
 
                                 

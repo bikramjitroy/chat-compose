@@ -171,7 +171,15 @@ const nodeTypes = {
       this.setState({elements:this.state.elements.concat(newNode)});
     };
     onElementClick(event, element){
-        // console.log(element);
+      if(document.getElementsByClassName('selectedblock').length){
+        let allElements = Array.from(document.getElementsByClassName('selectedblock'))
+        for (let elementL of allElements) {
+          elementL.classList.remove('selectedblock')
+        }
+        // document.getElementsByClassName('selectedblock').classList.remove("selectedblock");
+      }
+      
+        console.log('called',element,event.target.parentElement.classList.add("selectedblock"));
         this.setState({element:element}); 
     }   
 

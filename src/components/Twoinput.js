@@ -4,13 +4,13 @@ import { Handle } from 'react-flow-renderer';
 
 export default memo(({ data }) => {
   let errorClass='';
-  if(data.subtype==='suggestionchip'&&(!data.rowChip||data.rowChip.length<0||(data.rowChip[0].text===''||data.rowChip[0].description===''))){
+  if((data.subtype==='multimedia'&&(data.mediaUrl!==""))||(data.subtype==='suggestionchip'&&(!data.rowChip||data.rowChip.length<0||(data.rowChip[0].text===''||data.rowChip[0].description==='')))){
     errorClass='red';
   }
   return (
     <>
       
-      <div className={`blockelem noselect block botInput ${errorClass}`}>
+      <div className={`blockelem  block botInput ${errorClass}`}>
       <Handle type="target" id="a" position="top" style={{ borderRadius: 0 }} />
             <div className={data.class||'blockyBlue'}>
               <div className="blockyleft">
