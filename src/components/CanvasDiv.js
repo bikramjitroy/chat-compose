@@ -13,10 +13,15 @@ import TwoInput from './Twoinput';
 import StartInput from './Startinput';
 import Stopinput from './Stopinput';
 import Userinput from './Userinput';
-import data from './userFile.json'; 
+import {initialCanvasValue} from './constants/Constants'; 
 import ls from 'local-storage'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
+
+
+const data = initialCanvasValue;
+
 const nodeTypes = {
   selectorInput: TwoInput,
   selectorNodeStart: StartInput,
@@ -72,8 +77,37 @@ const nodeTypes = {
       // }
       
     onConnect(params){
-      this.setState({elements:addEdge({ ...params, type: 'smoothstep', animated: false,label: 'Edge label '+getIdEdge(),data:{label: 'Edge label '+getIdEdge(false),type:"edge"}, id:'react_edge_'+getIdEdge(false),arrowHeadType: 'arrow' }, this.state.elements)});
-    }
+      console.log("Connecting ", params.source, ' with node ', params.target)
+      
+      /***
+       * After user input node every transition edges are intent.
+       * From intents we could extract entities in NLP node.
+       * All other edges are just flow. They dont do any operation other than direct transition.
+       */
+      let outputsAreIntents = false;
+      for (let i = 0; i < this.state.elements.length; i++) {
+        let element = this.state.elements[i];
+        if (element.id === params.source && element.type === 'selectorUserInput') {
+          console.log("Source node is user input node hence outputs are intents", element);
+          outputsAreIntents = true;
+        }
+      }
+
+      if (outputsAreIntents) {
+        const incId =  '' + getIdEdge();
+        let edgeLabel = 'Intent Name ' + incId;
+        let edgeId = 'intent_' + incId;
+
+        this.setState({elements:addEdge({ ...params, type: 'smoothstep', animated: false,label: edgeLabel, data:{label: edgeLabel,type:"edge"}, id: edgeId, arrowHeadType: 'arrow' }, this.state.elements)});
+      } else {
+        const incId =  '' + getIdEdge();
+        let edgeLabel = '';
+        let edgeId = 'flow_' + incId;
+
+        this.setState({elements:addEdge({ ...params, type: 'smoothstep', animated: false,label: edgeLabel,data:{label: edgeLabel, type:"edge"}, id: edgeId, arrowHeadType: 'arrow' }, this.state.elements)});
+      }
+    };
+
     onElementsRemove(elementsToRemove){ 
       console.log('remove',elementsToRemove);
       if(elementsToRemove[0]['type']!=="selectorNodeStart"){
@@ -140,36 +174,41 @@ const nodeTypes = {
     onDragOver(event){
       event.preventDefault();
       event.dataTransfer.dropEffect = 'move';
-      console.log('sdsd');
+      //console.log('sdsd');
     };
     onNodeDragStop(event,node){
-      console.log('sdsd',node);
+      //console.log('sdsd',node);
     }
     
   
     onDrop(event){
       event.preventDefault();
-  // console.log('sasds',this);
+      console.log('Element drop: ',this);
       const reactFlowBounds = this.state.reactFlowWrapper.current.getBoundingClientRect();
       const type = event.dataTransfer.getData('application/reactflow');
       const elementCreate = JSON.parse(event.dataTransfer.getData('element'));
+
       const position = this.state.reactFlowInstance.project({
         x: event.clientX - reactFlowBounds.left,
         y: event.clientY - reactFlowBounds.top,
       });
-      console.log(elementCreate);
+
+      console.log("Element created: ",elementCreate);
       const newNode = {
         id: getId(),
         type,
         position,
         label: `${elementCreate.label}`,
         
-        data: { label: `${elementCreate.label}`,description: `${elementCreate.description}`,'subtype':`${elementCreate.subtype||''}`,type:"node",'image':elementCreate.image,'class':elementCreate.class },
+        data: { label: `${elementCreate.label}`,description: `${elementCreate.nextNodeHints}`,'subtype':`${elementCreate.subtype||''}`,type:"node",'image':elementCreate.image,'class':elementCreate.class },
       };
-      console.log('newNode',newNode,event.dataTransfer);
+
+      console.log('New node: ', newNode, event.dataTransfer);
   
       this.setState({elements:this.state.elements.concat(newNode)});
-    };
+      };
+      
+
     onElementClick(event, element){
       if(document.getElementsByClassName('selectedblock').length){
         let allElements = Array.from(document.getElementsByClassName('selectedblock'))

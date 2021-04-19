@@ -77,12 +77,14 @@ export class Left extends Component {
                   <div>
                     <span className="frame-people">
                       <span id="roster-region"><ul id="roster-view" className="roster">
-                          <li><div className="trpDisplayPicture dndnode input" onDragStart={(event) => onDragStart(event, 'default')}  draggable title='User Input'>
+                          <li>
+                            <div className="trpDisplayPicture dndnode input" onDragStart={(event) => onDragStart(event, 'default')}  draggable title='User Input'>
                               <img src="https://avatars1.githubusercontent.com/revskill10?v=4&s=30"   height={50} width={50} className="avatar__image" alt="revskill10"  title='User Input'/>
                               <div class="people-modal-result_label">User Input</div>
                             </div>
                           </li>
-                          <li><div className="trpDisplayPicture dndnode input" onDragStart={(event) => onDragStart(event, 'default')}  draggable title='Attribute'>
+                          <li>
+                            <div className="trpDisplayPicture dndnode input" onDragStart={(event) => onDragStart(event, 'default')}  draggable title='Attribute'>
                               <img src="https://avatars1.githubusercontent.com/revskill10?v=4&s=30"   height={50} width={50} className="avatar__image" alt="revskill10" title='Attribute'/>
                               <div class="people-modal-result_label">Attribute</div>
                             </div>
